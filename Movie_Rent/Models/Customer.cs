@@ -9,7 +9,7 @@ namespace Movie_Rent.Models
     public class Customer
     {
         public int Id { get; set; }
-        [Required(ErrorMessage="please enter customer's name")]
+        [Required]
         [StringLength(255)]
         public String Name { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }

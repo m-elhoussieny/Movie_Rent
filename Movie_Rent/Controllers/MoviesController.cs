@@ -81,7 +81,7 @@ namespace Movie_Rent.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel(movie)
             {
                 Movie = movie,
                 Genres = _context.Genres.ToList()
@@ -91,8 +91,19 @@ namespace Movie_Rent.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
          public ActionResult Save(Movie Movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel(Movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+
 
 
             if (Movie.Id == 0)
