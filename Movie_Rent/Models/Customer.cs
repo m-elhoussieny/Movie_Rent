@@ -9,7 +9,7 @@ namespace Movie_Rent.Models
     public class Customer
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage="please enter customer's name")]
         [StringLength(255)]
         public String Name { get; set; }
         public bool IsSubscribedToNewsLetter { get; set; }
@@ -17,6 +17,7 @@ namespace Movie_Rent.Models
         [Display(Name="MemberShip Type")]
         public byte MembershipTypeId { get; set; }
         [Display(Name="Date of Birth")]
+        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
     }
